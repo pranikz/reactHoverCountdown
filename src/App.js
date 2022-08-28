@@ -23,6 +23,10 @@ export default function App() {
   const handleStop = () => {
     setStatus(STATUS.STOPPED);
   };
+  const handleReset = () => {
+    setStatus(STATUS.STOPPED)
+    setSecondsRemaining(INITIAL_COUNT)
+  }
   useInterval(
     () => {
       if (secondsRemaining > 0) {
@@ -44,6 +48,10 @@ export default function App() {
         {twoDigits(secondsToDisplay)}
       </div>
       <div>Status: {status}</div>
+
+      <button onClick={handleReset} type="button">
+        Reset
+      </button>
      </div>
     </div>
     </div>
@@ -53,7 +61,7 @@ export default function App() {
 function useInterval(callback, delay) {
   const savedCallback = useRef();
 
-  // Remember the latest callback.
+  // save the latest callback.
   useEffect(() => {
     savedCallback.current = callback;
   }, [callback]);
